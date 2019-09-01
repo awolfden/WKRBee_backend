@@ -6,7 +6,7 @@ const Employee = require('../models/EmployeeModel');
 
 
 // GET ALL ROUTE
-router.get('/', async (req, res, next) => {
+router.get('/', async (req, res) => {
     console.log(req.body, 'this is get all')
     try {
         const allEmployees = await Employee.find();

@@ -23,7 +23,7 @@ router.get('/', async (req, res, next) => {
 //CREATE NEW ROUTE
 router.post('/register', async (req, res) => {
     try {
-      const password = req.body.userPassword;
+      const password = req.body.password;
       const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
       const userDbEntry = {};
       userDbEntry.userName = req.body.userName;

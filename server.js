@@ -10,11 +10,11 @@ const dotenv = require('dotenv');
 dotenv.config();
  
 
-// app.use(cors({
-//     origin: [process.env.REACT_ADDRESS, 'https://api.darksky.net'],
-//     credentials: true,
-//     optionsSuccessStatus: 200
-// }));
+app.use(cors({
+    origin: [process.env.REACT_ADDRESS],
+    credentials: true,
+    optionsSuccessStatus: 200
+}));
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
