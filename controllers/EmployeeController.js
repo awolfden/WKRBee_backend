@@ -1,0 +1,100 @@
+const express = require('express');
+const router = express.Router();
+const Employee = require('../models/EmployeeModel');
+
+
+
+
+// GET ALL ROUTE
+router.get('/', async (req, res, next) => {
+    console.log(req.body, 'this is get all')
+    try {
+        const allEmployees = await Employee.find();
+
+        res.json({
+            status: 200,
+            data: allEmployees
+        });
+
+    } catch(err){
+        console.log(err)
+        res.send(err)
+    }
+});
+
+//CREATE NEW ROUTE
+router.post('/', async (req, res) => {
+    try {
+      console.log(req.body, ' this is req.body in create route');
+      const createdEmployee = await Employee.create(req.body);
+      const updatedUserEmployee = await Employee.findByIdAndUpdate(createdEmployee._id, {user : req.session.usersDbId}, {new: true});
+      console.log(updatedUserEmployee, '<-- this is employee with user id added');
+      res.json({
+        status: 200,
+        data: updatedUserEmployee
+      });
+  
+    } catch(err){
+      console.log(err);
+    }
+  });
+  
+//DELETE ROUTE
+
+router.delete('/:id', async (req, res) => {
+    console.log('hit delete route');
+    
+    try {
+        const deletedEmployee = await Employee.findByIdAndDelete(req.params.id);
+        console.log(deletedEmployee);
+        res.json({
+            status: 200,
+            data: deletedEmployee
+        });
+
+    } catch(err) {
+        console.log(err);
+    }
+})
+
+
+//EDIT ROUTE
+
+router.put('/:id', async (req, res) => {
+
+    try {
+        const updatedEmployee = await Employee.findByIdAndUpdate(req.params.id, req.body, {new: true});
+
+        res.json({
+            status: 200,
+            data: updatedEmployee
+        })
+
+    } catch(err) {
+        console.log(err);
+    }
+})
+
+
+//SHOW ROUTE
+
+router.get('/:id', async (req, res, next) => {
+    try{
+        const foundEmployee = await Employee.findById(req.params.id);
+
+        res.json({
+            status: 200,
+            data: foundEmployee
+        })
+    } catch(err) {
+        console.log(err)
+    }
+
+});
+
+
+
+
+
+
+module.exports = router;
