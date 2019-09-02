@@ -66,13 +66,13 @@ router.post('/register', async (req, res) => {
 
 //LOGOUT USER 
 router.get('/logout', async (req, res) => {
-    console.log(req.session);
+    console.log(req.session, 'on 69');
     req.session.destroy((err) => {
         if(err){
-            console.log(err)
+            console.log(err, 'there was an error destroying the session')
         }
     })
-
+    console.log(req.session, 'should be undefined here')
     try {
         res.json({
             status: 200,
@@ -81,7 +81,7 @@ router.get('/logout', async (req, res) => {
     } catch(err) {
         console.log(err);
     }
-    console.log(req.session, 'successful logout');
+    console.log(req.session, 'successful logout on 84');
 })
 
 

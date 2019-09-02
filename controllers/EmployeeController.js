@@ -7,10 +7,10 @@ const Employee = require('../models/EmployeeModel');
 
 // GET ALL ROUTE
 router.get('/', async (req, res) => {
-    console.log(req.body, 'this is get all')
+    console.log('get all employees route hit')
     try {
         const allEmployees = await Employee.find();
-
+        console.log(allEmployees, 'all employees');
         res.json({
             status: 200,
             data: allEmployees
@@ -31,6 +31,7 @@ router.post('/', async (req, res) => {
       console.log(updatedUserEmployee, '<-- this is employee with user id added');
       res.json({
         status: 200,
+        message: 'successfully added employee',
         data: updatedUserEmployee
       });
   
