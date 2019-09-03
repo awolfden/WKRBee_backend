@@ -3,9 +3,9 @@ const router = express.Router();
 const User = require('../models/UserModel');
 const bcrypt = require('bcryptjs');
 
-// GET ALL ROUTE
+// GET ALL ROUTE FOR POSTMAN DEBUGGING ONLY
 router.get('/', async (req, res, next) => {
-    console.log(req.body, 'this is get all users')
+
     try {
         const allUsers = await User.find({});
 
@@ -31,15 +31,15 @@ router.post('/register', async (req, res) => {
       
       try{
         const foundUser = await User.findOne({'userName' : userDbEntry.userName});
-        console.log(foundUser);
+
         if(foundUser){
-            console.log('USER NOT AVAILABLE');
+            console.log('User name not available');
             res.json({
                 status: 200,
                 data: 'User name not available'
             })
         } else {
-            console.log('Im in here');
+            console.log('successful user creation');
             const createdUser = await User.create(userDbEntry);
             req.session.logged = true;
             req.session.usersDbId = createdUser._id;
@@ -66,13 +66,12 @@ router.post('/register', async (req, res) => {
 
 //LOGOUT USER 
 router.get('/logout', async (req, res) => {
-    console.log(req.session, 'on 69');
     req.session.destroy((err) => {
         if(err){
             console.log(err, 'there was an error destroying the session')
         }
     })
-    console.log(req.session, 'should be undefined here')
+
     try {
         res.json({
             status: 200,
@@ -81,13 +80,11 @@ router.get('/logout', async (req, res) => {
     } catch(err) {
         console.log(err);
     }
-    console.log(req.session, 'successful logout on 84');
 })
 
 
 //LOGIN USER
 router.post('/login', async (req, res) => {
-    console.log(req.body, 'req.body on 91');
     try {
         const foundUser = await User.findOne({
             'userName': req.body.userName
@@ -127,8 +124,6 @@ router.post('/login', async (req, res) => {
 
 })
   
-
-
 //DELETE ROUTE
 router.delete('/:id', async (req, res) => {
     console.log('hit delete route');
@@ -146,7 +141,8 @@ router.delete('/:id', async (req, res) => {
     }
 })
 
-//EDIT ROUTE
+// EDIT ROUTE FOR POSSIBLY IMPLEMENTATION OF PROFILE PAGE AT SOME POINT 
+// NOT USED CURRENTLY
 
 router.put('/:id', async (req, res) => {
 
@@ -164,7 +160,8 @@ router.put('/:id', async (req, res) => {
 })
 
 
-//SHOW ROUTE
+// SHOW ROUTE FOR POSSIBLY IMPLEMENTATION OF PROFILE PAGE AT SOME POINT 
+// NOT USED CURRENTLY
 
 router.get('/:id', async (req, res, next) => {
 try{

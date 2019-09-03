@@ -3,14 +3,10 @@ const router = express.Router();
 const Employee = require('../models/EmployeeModel');
 
 
-
-
 // GET ALL ROUTE
 router.get('/', async (req, res) => {
-    console.log('get all employees route hit')
     try {
         const allEmployees = await Employee.find();
-        console.log(allEmployees, 'all employees');
         res.json({
             status: 200,
             data: allEmployees
@@ -25,10 +21,9 @@ router.get('/', async (req, res) => {
 //CREATE NEW ROUTE
 router.post('/', async (req, res) => {
     try {
-      console.log(req.body, ' this is req.body in create route');
       const createdEmployee = await Employee.create(req.body);
       const updatedUserEmployee = await Employee.findByIdAndUpdate(createdEmployee._id, {user : req.session.usersDbId}, {new: true});
-      console.log(updatedUserEmployee, '<-- this is employee with user id added');
+
       res.json({
         status: 200,
         message: 'successfully added employee',
@@ -43,11 +38,10 @@ router.post('/', async (req, res) => {
 //DELETE ROUTE
 
 router.delete('/:id', async (req, res) => {
-    console.log('hit delete route');
-    
+
     try {
         const deletedEmployee = await Employee.findByIdAndDelete(req.params.id);
-        console.log(deletedEmployee);
+        //console.log(deletedEmployee);
         res.json({
             status: 200,
             data: deletedEmployee
@@ -77,8 +71,8 @@ router.put('/:id', async (req, res) => {
 })
 
 
-//SHOW ROUTE
-
+// SHOW ROUTE - CREATED FOR BACKEND, BUT DEALT WITH FILTERING ON THE FRONT END
+// DECIDED IT WOULD BE MORE EFFICIENT THIS WAY BC OF HOW THE USER FLOW WAS SET UP
 router.get('/:id', async (req, res, next) => {
     try{
         const foundEmployee = await Employee.findById(req.params.id);
@@ -92,10 +86,6 @@ router.get('/:id', async (req, res, next) => {
     }
 
 });
-
-
-
-
 
 
 module.exports = router;
