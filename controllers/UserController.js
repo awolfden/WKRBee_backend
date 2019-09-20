@@ -46,9 +46,7 @@ router.post('/register', cors(corsOptions), async (req, res) => {
             res.json({
                 status: 200,
                 data: 'User name not available',
-                headers: {
-                    "Access-Control-Allow-Origin": true
-                }
+                
             })
         } else {
             console.log('successful user creation');
