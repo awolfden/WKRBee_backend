@@ -10,7 +10,7 @@ const dotenv = require('dotenv');
 dotenv.config();
  
 const allowCrossDomain = function(req, res, next) {
-    res.header('Access-Control-Allow-Origin', 'https://awolfden.github.io/');
+    res.header('Access-Control-Allow-Origin', 'https://awolfden.github.io/WKRBee');
     res.header('Access-Control-Allow-Methods', 'GET,PUT,POST,DELETE');
     res.header('Access-Control-Allow-Headers', 'Content-Type');
     next();
