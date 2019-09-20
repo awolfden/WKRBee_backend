@@ -2,8 +2,12 @@ const express = require('express');
 const router = express.Router();
 const User = require('../models/UserModel');
 const bcrypt = require('bcryptjs');
+const cors = require('cors');
 
-
+const corsOptions = {
+    origin: 'https://awolfden.github.io',
+    optionsSuccessStatus: 200
+}
 
 // GET ALL ROUTE FOR POSTMAN DEBUGGING ONLY
 router.get('/', async (req, res, next) => {
@@ -23,7 +27,7 @@ router.get('/', async (req, res, next) => {
 });
 
 //CREATE NEW ROUTE
-router.post('/register', async (req, res) => {
+router.post('/register', cors(corsOptions), async (req, res) => {
     try {
       const password = req.body.password;
       const passwordHash = bcrypt.hashSync(password, bcrypt.genSaltSync(10));
@@ -70,7 +74,7 @@ router.post('/register', async (req, res) => {
 
 
 //LOGOUT USER 
-router.get('/logout', async (req, res) => {
+router.get('/logout', cors(corsOptions), async (req, res) => {
     req.session.destroy((err) => {
         if(err){
             console.log(err, 'there was an error destroying the session')

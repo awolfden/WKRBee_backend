@@ -15,7 +15,6 @@ app.use(cors({
     origin: ["https://awolfden.github.io/"],
     credentials: true,
     optionsSuccessStatus: 200,
-    allowedHeaders: "Access-Control-Allow-Origin"
 }));
 
 
