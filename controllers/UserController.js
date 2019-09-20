@@ -6,8 +6,11 @@ const cors = require('cors');
 
 const corsOptions = {
     origin: 'https://awolfden.github.io',
-    optionsSuccessStatus: 200
-}
+    optionsSuccessStatus: 200,
+    headers: {
+        'Access-Control-Allow-Origin': 'https://awolfden.github.io'
+    }
+};
 
 // GET ALL ROUTE FOR POSTMAN DEBUGGING ONLY
 router.get('/', async (req, res, next) => {
@@ -93,7 +96,7 @@ router.get('/logout', cors(corsOptions), async (req, res) => {
 
 
 //LOGIN USER
-router.post('/login', async (req, res) => {
+router.post('/login', cors(corsOptions), async (req, res) => {
     
     try {
         const foundUser = await User.findOne({
@@ -112,9 +115,6 @@ router.post('/login', async (req, res) => {
                         msg: `login successful`,
                         user: req.session.username,
                         usersDbId: req.session.usersDbId
-                    },
-                    headers: {
-                        "Access-Control-Allow-Origin": true
                     }
                 });
                 
