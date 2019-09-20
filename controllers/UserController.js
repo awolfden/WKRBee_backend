@@ -30,7 +30,6 @@ router.post('/register', async (req, res) => {
       const userDbEntry = {};
       userDbEntry.userName = req.body.userName;
       userDbEntry.userPassword = passwordHash;
-      res.header("Access-Control-Allow-Origin", "https://awolfden.github.io");
 
       try{
         const foundUser = await User.findOne({'userName' : userDbEntry.userName});
@@ -39,7 +38,10 @@ router.post('/register', async (req, res) => {
             console.log('User name not available');
             res.json({
                 status: 200,
-                data: 'User name not available'
+                data: 'User name not available',
+                header: {
+                    "Access-Control-Allow-Origin": "https://awolfden.github.io"
+                }
             })
         } else {
             console.log('successful user creation');
@@ -88,7 +90,7 @@ router.get('/logout', async (req, res) => {
 
 //LOGIN USER
 router.post('/login', async (req, res) => {
-    res.header("Access-Control-Allow-Origin", "https://awolfden.github.io");
+    
     try {
         const foundUser = await User.findOne({
             'userName': req.body.userName
@@ -106,6 +108,9 @@ router.post('/login', async (req, res) => {
                         msg: `login successful`,
                         user: req.session.username,
                         usersDbId: req.session.usersDbId
+                    },
+                    header: {
+                        "Access-Control-Allow-Origin": "https://awolfden.github.io"
                     }
                 });
                 
