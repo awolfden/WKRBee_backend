@@ -28,7 +28,8 @@ router.post('/register', async (req, res) => {
       const userDbEntry = {};
       userDbEntry.userName = req.body.userName;
       userDbEntry.userPassword = passwordHash;
-      
+      res.header("Access-Control-Allow-Origin", "https://awolfden.github.io");
+
       try{
         const foundUser = await User.findOne({'userName' : userDbEntry.userName});
 
@@ -85,6 +86,7 @@ router.get('/logout', async (req, res) => {
 
 //LOGIN USER
 router.post('/login', async (req, res) => {
+    res.header("Access-Control-Allow-Origin", "https://awolfden.github.io");
     try {
         const foundUser = await User.findOne({
             'userName': req.body.userName

@@ -10,10 +10,12 @@ const dotenv = require('dotenv');
 dotenv.config();
  
 
+
 app.use(cors({
     origin: ["https://awolfden.github.io/"],
     credentials: true,
-    optionsSuccessStatus: 200
+    optionsSuccessStatus: 200,
+    
 }));
 
 app.use(express.static(path.join(__dirname, 'client/build')));
