@@ -3,11 +3,7 @@ const router = express.Router();
 const User = require('../models/UserModel');
 const bcrypt = require('bcryptjs');
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://awolfden.github.io/");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 
 // GET ALL ROUTE FOR POSTMAN DEBUGGING ONLY
 router.get('/', async (req, res, next) => {

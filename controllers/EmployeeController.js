@@ -2,11 +2,7 @@ const express = require('express');
 const router = express.Router();
 const Employee = require('../models/EmployeeModel');
 
-app.use(function(req, res, next) {
-    res.header("Access-Control-Allow-Origin", "https://awolfden.github.io/");
-    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
-    next();
-});
+
 
 // GET ALL ROUTE
 router.get('/', async (req, res) => {
