@@ -12,7 +12,7 @@ dotenv.config();
 
 app.use(cors({
     origin: ["https://awolfden.github.io/WKRBee/"],
-    credentials: true,
+    // credentials: true,
     optionsSuccessStatus: 200
 }));
 
