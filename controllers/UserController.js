@@ -40,7 +40,7 @@ router.post('/register', async (req, res) => {
                 status: 200,
                 data: 'User name not available',
                 headers: {
-                    "Access-Control-Allow-Origin": "https://awolfden.github.io"
+                    "Access-Control-Allow-Origin": true
                 }
             })
         } else {
@@ -110,7 +110,7 @@ router.post('/login', async (req, res) => {
                         usersDbId: req.session.usersDbId
                     },
                     headers: {
-                        "Access-Control-Allow-Origin": "https://awolfden.github.io"
+                        "Access-Control-Allow-Origin": true
                     }
                 });
                 
