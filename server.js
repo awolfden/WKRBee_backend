@@ -15,8 +15,13 @@ app.use(cors({
     origin: ["https://awolfden.github.io/"],
     credentials: true,
     optionsSuccessStatus: 200,
-    
 }));
+
+app.use(function(req, res, next) {
+    res.header("Access-Control-Allow-Origin", "https://awolfden.github.io/");
+    res.header("Access-Control-Allow-Headers", "Origin, X-Requested-With, Content-Type, Accept");
+    next();
+  });
 
 app.use(express.static(path.join(__dirname, 'client/build')));
 
