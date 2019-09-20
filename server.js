@@ -38,6 +38,7 @@ store.on('error', function(error) {
 app.use(session({
     secret: 'worker bee works for me',
     resave: false,
+    saveUninitialized: true,
     cookie: {
         maxAge: 1000 * 60 * 60 * 24 * 7
     },
